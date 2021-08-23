@@ -9,7 +9,8 @@ const TicTacToeContext = () => {
         activePlayer: 0,
         gameDetails: [{playerName: "", color: "#562971cf", selectedList: []}, {playerName: "", color: "#d44351", selectedList: []}],
         winner: "", 
-        disabledGame: false
+        disabledGame: false,
+        history: []
     }
 
     const [gameProps,setGameProps] = useState(initialValues)
@@ -26,7 +27,9 @@ const TicTacToeContext = () => {
     }
 
     const gotoHomeComponent = () => {
-        setGameProps(initialValues)
+        let initialState = {...initialValues}
+        initialState.history = gameProps.history
+        setGameProps(initialState)
     }
 
     useEffect(() => {
@@ -38,6 +41,7 @@ const TicTacToeContext = () => {
         const updateWinnerData = (id) => {
             let playerInitialObject = {...gameProps}
             let gameDetails = playerInitialObject.gameDetails
+            playerInitialObject.history = [...playerInitialObject.history, {playerNameOne: gameDetails[0].playerName,playerNameTwo: gameDetails[1].playerName, gameMode: `${playerInitialObject.gameMode} * ${playerInitialObject.gameMode}`, winner: (id < 2) ? gameDetails[id].playerName : "Match Draw" }]
             gameDetails[0].selectedList = []
             gameDetails[1].selectedList = []
             playerInitialObject = {...playerInitialObject, activePlayer: 0, winner: (id < 2) ? gameDetails[id].playerName : "Match Draw", disabledGame: true}

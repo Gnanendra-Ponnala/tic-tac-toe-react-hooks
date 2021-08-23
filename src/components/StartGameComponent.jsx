@@ -1,14 +1,25 @@
 import React, {useContext} from 'react'
+import {Link} from 'react-router-dom'
 import TicTacToeGame from './TicTacToeGame'
 import { GlobalCreateContext } from '../GlobalContext';
 
+const homeStyles = {
+    backgroundColor: "#0d6efd",
+    textDecoration: "none",
+    color: "white",
+    fontSize: "12px",
+    borderRadius: "2px",
+    padding: "2px",
+    marginLeft: "2px"
+}
+
 function StartGameComponent() {
+    
     const ticTocToeState = useContext(GlobalCreateContext).ticTacToe
     const [gameProps, setGameProps] = ticTocToeState.gameProps
     const handleStartGame = ticTocToeState.handleStartGame
     const gotoHomeComponent = ticTocToeState.gotoHomeComponent
     const handleNewGame = ticTocToeState.handleNewGame
-
     const handleUpdatePlayerDetails = (e, player) => {
         let playerDetails = {...gameProps};
         playerDetails.gameDetails[player].playerName = e.target.value;
@@ -18,7 +29,7 @@ function StartGameComponent() {
     return (
         <div className="container">
           <div className="col-sm-12 text-center">
-              <h1 style={{marginTop: "50px"}}>Tic-Tac-Toe</h1>
+              <h1 style={{marginTop: "50px"}}>Tic-Tac-Toe <Link style={homeStyles} to='/'>Home</Link><Link style={homeStyles} to='/history'>History</Link></h1>
                 <input type="text" className="form-control" name="PlayerOne" placeholder="Player Name 1" value={gameProps.gameDetails[0].playerName} autoComplete="off" style={{display: (gameProps.displayGameMode) ? "inline-block" : "none", width: "250px", marginRight: "10px"}} onChange={(e) => handleUpdatePlayerDetails(e,0)} />
               
                 <input type="text" className="form-control" name="PlayerTwo" placeholder="Player Name 2" value={gameProps.gameDetails[1].playerName} autoComplete="off" style={{display: (gameProps.displayGameMode) ? "inline-block" : "none", width: "250px", marginRight: "10px"}} onChange={(e) => handleUpdatePlayerDetails(e,1)} />  
@@ -34,8 +45,8 @@ function StartGameComponent() {
                 <button type="button" className="btn btn-sm btn-primary" style={{fontWeight: "700", marginTop: "-6px", height: "38px", backgroundColor: "#2a792a", borderColor: "#2a792a"}} onClick={handleStartGame}>Start Game</button> 
                 : 
                 <>
-                    <button type="button" className="btn btn-sm btn-primary" style={{fontWeight: "700", marginTop: "-6px", paddingBottom: "6px", backgroundColor:"darkkhaki", borderColor:"darkkhaki"}} onClick={gotoHomeComponent}>Go to Home</button>
-                    <button type="button" className="btn btn-sm btn-primary" style={{fontWeight: "700", marginTop: "-6px", marginLeft: "10px", paddingBottom: "6px", backgroundColor: "darkcyan", borderColor: "darkcyan"}} onClick={handleNewGame}>Start New Game</button>
+                    <button type="button" className="btn btn-sm btn-primary" style={{fontWeight: "700", marginTop: "-6px", paddingBottom: "6px", backgroundColor:"darkkhaki", borderColor:"darkkhaki"}} onClick={gotoHomeComponent}>Back</button>
+                    <button type="button" className="btn btn-sm btn-primary" style={{fontWeight: "700", marginTop: "-6px", marginLeft: "10px", paddingBottom: "6px", backgroundColor: "darkcyan", borderColor: "darkcyan"}} onClick={handleNewGame}>New Game</button>
                 </>    
                 }
               

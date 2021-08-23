@@ -1,12 +1,12 @@
 import GlobalContext from './GlobalContext'
-import StartGameComponent from './components/StartGameComponent'
+import WebRouter from './router/WebRouter'
 
 
 function App() {
   return (
     <GlobalContext>
         <div className="App">
-          <StartGameComponent />
+          <WebRouter />
       </div>
     </GlobalContext>
     
